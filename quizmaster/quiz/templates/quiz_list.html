@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Quizzes</h1>
+<ul class="list-group">
+    {% for quiz in quizzes %}
+    <li class="list-group-item">
+        <a href="{% url 'quiz_detail' quiz.pk %}">{{ quiz.title }}</a>
+    </li>
+    {% endfor %}
+</ul>
+{% endblock %}
