@@ -22,9 +22,11 @@
     <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-auto">
             {% if user.is_authenticated %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a>
-                </li>
+                {% if user.is_staff %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a>
+                    </li>
+                {% endif %}
                 <li class="nav-item">
                     <a class="nav-link" href="{% url 'quiz_list' %}">Quizzes</a>
                 </li>
@@ -67,11 +69,6 @@
 <script>
     // Dismiss alert messages
     $('.alert').alert();
-
-    // Dismiss welcome message
-    $('#dismissWelcome').on('click', function() {
-        $('#welcomeMessage').remove();
-    });
 </script>
 
 </body>
