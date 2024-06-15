@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>{{ quiz.title }}</h1>
+<p>{{ quiz.description }}</p>
+
+<div id="timer">Time left: <span id="time"></span></div>
+
+<form method="POST" id="quiz-form">
+    {% csrf_token %}
+    {% for question in questions %}
+    <div>
+        <p>{{ question.text }}</p>
+        {% for choice in question.choice_set.all %}
+        <div>
+            <input type="radio" id="choice_{{ choice.id }}" name="{{ question.id }}" value="{{ choice.id }}" required>
+            <label for="choice_{{ choice.id }}">{{ choice.text }}</label>
+        </div>
+        {% endfor %}
+    </div>
+    {% endfor %}
+    <input type="hidden" name="time_taken" id="time_taken" value="0">
+    <button type="submit">Submit</button>
+</form>
+
+<script>
+let timeLeft = {{ time_limit }};
+const timerElement = document.getElementById('time');
+const form = document.getElementById('quiz-form');
+const timeTakenInput = document.getElementById('time_taken');
+
+const timer = setInterval(() => {
+    if (timeLeft <= 0) {
+        clearInterval(timer);
+        alert("Time's up! Submitting the quiz.");
+        form.submit();
+    }
+    timeLeft--;
+    timerElement.textContent = timeLeft + ' seconds';
+}, 1000);
+
+form.addEventListener('submit', () => {
+    clearInterval(timer);
+    timeTakenInput.value = {{ time_limit }} * 60 - timeLeft;
+});
+</script>
+{% endblock %}

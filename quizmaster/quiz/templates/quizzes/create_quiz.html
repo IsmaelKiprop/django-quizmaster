@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Create Quiz</h1>
+
+<form method="POST">
+    {% csrf_token %}
+    <div>
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" required>
+    </div>
+    <div>
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" required></textarea>
+    </div>
+    <div>
+        <label for="time_limit">Time Limit (in minutes):</label>
+        <input type="number" id="time_limit" name="time_limit" required>
+    </div>
+    <button type="submit">Create Quiz</button>
+</form>
+{% endblock %}

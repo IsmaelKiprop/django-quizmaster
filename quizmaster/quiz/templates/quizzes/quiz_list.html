@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>Quizzes</h2>
+<div class="list-group mt-4">
+    {% for quiz in quizzes %}
+        <a href="{% url 'quiz_detail' quiz.pk %}" class="list-group-item list-group-item-action">
+            {{ quiz.title }}
+        </a>
+    {% endfor %}
+</div>
+{% endblock %}
