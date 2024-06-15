@@ -1,8 +1,15 @@
-{% extends 'base.html' %}
-
 {% block content %}
-<h2>Quiz Results</h2>
+<h1>Quiz Results</h1>
 <p>Score: {{ submission.score }}%</p>
 <p>Submitted by: {{ submission.user.username }}</p>
 <p>Quiz: {{ submission.quiz.title }}</p>
+
+<h2>Feedback</h2>
+<ul>
+    {% for message in feedback %}
+    <li>{{ message }}</li>
+    {% endfor %}
+</ul>
+
+<a href="{% url 'quiz_list' %}" class="btn btn-primary">Back to Quizzes</a>
 {% endblock %}

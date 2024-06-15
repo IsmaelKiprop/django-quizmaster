@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm
 from .models import Quiz, Question, Choice, Submission, User
 from django.utils import timezone
@@ -30,14 +30,17 @@ def login_view(request):
             return redirect('quiz_list')
     return render(request, 'registration/login.html')
 
+@login_required
 def logout_view(request):
     logout(request)
     return redirect('login')
 
+@login_required
 def quiz_list(request):
     quizzes = Quiz.objects.all()
     return render(request, 'quizzes/quiz_list.html', {'quizzes': quizzes})
 
+@login_required
 def quiz_detail(request, pk):
     quiz = get_object_or_404(Quiz, pk=pk)
     questions = Question.objects.filter(quiz=quiz)
@@ -50,16 +53,28 @@ def submit_quiz(request, pk):
     if request.method == 'POST':
         score = 0
         time_taken = int(request.POST.get('time_taken'))
+        feedback = []
+
         for question in questions:
             choice_id = request.POST.get(str(question.id))
-            choice = Choice.objects.get(id=choice_id)
-            if choice.is_correct:
-                score += 1
-        submission = Submission(user=request.user, quiz=quiz, score=score, time_taken=time_taken)
+            if choice_id:
+                choice = Choice.objects.get(id=choice_id)
+                if choice.is_correct:
+                    score += 1
+                    feedback.append(f"Question: {question.text} - Correct!")
+                else:
+                    correct_choice = question.choices.get(is_correct=True)
+                    feedback.append(f"Question: {question.text} - Incorrect. Correct answer: {correct_choice.text}")
+
+        score_percentage = int((score / len(questions)) * 100)
+        submission = Submission(user=request.user, quiz=quiz, score=score_percentage, time_taken=time_taken)
         submission.save()
-        return redirect('quiz_results', pk=submission.id)
+
+        return render(request, 'quizzes/quiz_results.html', {'submission': submission, 'feedback': feedback})
+
     return render(request, 'quizzes/submit_quiz.html', {'quiz': quiz, 'questions': questions, 'time_limit': quiz.time_limit * 60})
 
+@login_required
 def quiz_results(request, pk):
     submission = get_object_or_404(Submission, pk=pk)
     return render(request, 'quizzes/quiz_results.html', {'submission': submission})

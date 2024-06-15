@@ -9,10 +9,10 @@
 <form method="POST" id="quiz-form">
     {% csrf_token %}
     {% for question in questions %}
-    <div>
+    <div class="question">
         <p>{{ question.text }}</p>
-        {% for choice in question.choice_set.all %}
-        <div>
+        {% for choice in question.choices.all %}
+        <div class="choice">
             <input type="radio" id="choice_{{ choice.id }}" name="{{ question.id }}" value="{{ choice.id }}" required>
             <label for="choice_{{ choice.id }}">{{ choice.text }}</label>
         </div>
@@ -20,7 +20,7 @@
     </div>
     {% endfor %}
     <input type="hidden" name="time_taken" id="time_taken" value="0">
-    <button type="submit">Submit</button>
+    <button type="submit" class="btn btn-primary">Submit</button>
 </form>
 
 <script>
