@@ -1,3 +1,5 @@
+<!-- quizzes/templates/quizzes/quiz_list.html -->
+
 {% extends 'base.html' %}
 
 {% block content %}
@@ -5,9 +7,17 @@
     <h2>Quizzes</h2>
     <div class="list-group mt-4">
         {% for quiz in quizzes %}
-            <a href="{% url 'quiz_detail' quiz.pk %}" class="list-group-item list-group-item-action">
-                {{ quiz.title }}
-            </a>
+            <div class="list-group-item">
+                <a href="{% url 'quiz_detail' quiz.pk %}" class="list-group-item-action">
+                    {{ quiz.title }}
+                </a>
+                {% if user.is_admin %}
+                    <form method="post" action="{% url 'delete_quiz' quiz.pk %}" class="d-inline">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-sm btn-danger ml-2">Delete</button>
+                    </form>
+                {% endif %}
+            </div>
         {% endfor %}
     </div>
 </div>
@@ -46,6 +56,9 @@
         border-radius: 5px;
         margin-bottom: 10px;
         transition: all 0.3s;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
     }
 
     .list-group-item:hover {

@@ -1,0 +1,15 @@
+<!-- quizzes/templates/quizzes/delete_quiz_confirm.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h2>Delete Quiz</h2>
+    <p>Are you sure you want to delete "{{ quiz.title }}"?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Delete</button>
+        <a href="{% url 'dashboard' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

@@ -1,7 +1,7 @@
 # quiz/urls.py
 
 from django.urls import path
-from .views import signup, login_view, logout_view, quiz_list, quiz_detail, submit_quiz, quiz_results, dashboard, create_quiz, update_quiz, create_question, create_choice, update_question, update_choice, delete_question, delete_choice
+from .views import signup, login_view, logout_view, quiz_list, quiz_detail, submit_quiz, quiz_results, dashboard, create_quiz, update_quiz, create_question, create_choice, update_question, update_choice, delete_question, delete_choice, delete_quiz
 
 urlpatterns = [
     path('signup/', signup, name='signup'),
@@ -20,4 +20,5 @@ urlpatterns = [
     path('choice/<int:choice_pk>/update/', update_choice, name='update_choice'),
     path('question/<int:question_pk>/delete/', delete_question, name='delete_question'),
     path('choice/<int:choice_pk>/delete/', delete_choice, name='delete_choice'),
+    path('quiz/<int:quiz_pk>/delete/', delete_quiz, name='delete_quiz'),
 ]

@@ -162,6 +162,18 @@ def delete_choice(request, choice_pk):
         return redirect('create_choice', question_pk=choice.question.pk)
     
     return render(request, 'quizzes/delete_choice_confirm.html', {'choice': choice})
+
+@login_required
+def delete_quiz(request, quiz_pk):
+    quiz = get_object_or_404(Quiz, pk=quiz_pk, creator=request.user)
+    
+    if request.method == 'POST':
+        quiz.delete()
+        messages.success(request, 'Quiz deleted successfully!')
+        return redirect('dashboard')
+    
+    return render(request, 'quizzes/delete_quiz_confirm.html', {'quiz': quiz})
+
 @login_required
 def submit_quiz(request, pk):
     quiz = get_object_or_404(Quiz, pk=pk)
