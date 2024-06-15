@@ -1,15 +1,87 @@
+{% extends 'base.html' %}
+
 {% block content %}
-<h1>Quiz Results</h1>
-<p>Score: {{ submission.score }}%</p>
-<p>Submitted by: {{ submission.user.username }}</p>
-<p>Quiz: {{ submission.quiz.title }}</p>
+<div class="container">
+    <h1>Quiz Results</h1>
+    <p>Score: {{ submission.score }}%</p>
+    <p>Submitted by: {{ submission.user.username }}</p>
+    <p>Quiz: {{ submission.quiz.title }}</p>
 
-<h2>Feedback</h2>
-<ul>
-    {% for message in feedback %}
-    <li>{{ message }}</li>
-    {% endfor %}
-</ul>
+    <h2>Feedback</h2>
+    <ul class="feedback-list">
+        {% for message in feedback %}
+        <li>{{ message }}</li>
+        {% endfor %}
+    </ul>
 
-<a href="{% url 'quiz_list' %}" class="btn btn-primary">Back to Quizzes</a>
+    <a href="{% url 'quiz_list' %}" class="btn btn-primary">Back to Quizzes</a>
+</div>
+
+<style>
+    /* General Styles */
+    body {
+        font-family: 'Roboto', sans-serif;
+        background-color: #f8f9fa;
+    }
+
+    .container {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+        font-size: 28px;
+        font-weight: bold;
+        color: #343a40;
+        margin-bottom: 20px;
+    }
+
+    p {
+        font-size: 16px;
+        color: #666;
+        margin-bottom: 10px;
+    }
+
+    h2 {
+        font-size: 24px;
+        font-weight: bold;
+        color: #343a40;
+        margin-top: 20px;
+        margin-bottom: 10px;
+    }
+
+    .feedback-list {
+        margin-bottom: 20px;
+        padding-left: 20px;
+    }
+
+    .feedback-list li {
+        font-size: 16px;
+        color: #666;
+        margin-bottom: 5px;
+    }
+
+    .btn-primary {
+        background-color: #007bff;
+        border-color: #007bff;
+        color: #fff;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        text-decoration: none;
+        display: inline-block;
+    }
+
+    .btn-primary:hover {
+        background-color: #0056b3;
+        border-color: #0056b3;
+        text-decoration: none;
+    }
+</style>
 {% endblock %}

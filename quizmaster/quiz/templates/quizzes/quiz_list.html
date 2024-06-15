@@ -1,12 +1,69 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>Quizzes</h2>
-<div class="list-group mt-4">
-    {% for quiz in quizzes %}
-        <a href="{% url 'quiz_detail' quiz.pk %}" class="list-group-item list-group-item-action">
-            {{ quiz.title }}
-        </a>
-    {% endfor %}
+<div class="container">
+    <h2>Quizzes</h2>
+    <div class="list-group mt-4">
+        {% for quiz in quizzes %}
+            <a href="{% url 'quiz_detail' quiz.pk %}" class="list-group-item list-group-item-action">
+                {{ quiz.title }}
+            </a>
+        {% endfor %}
+    </div>
 </div>
+
+<style>
+    /* General Styles */
+    body {
+        font-family: 'Roboto', sans-serif;
+        background-color: #f8f9fa;
+    }
+
+    .container {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        font-size: 28px;
+        font-weight: bold;
+        color: #343a40;
+        margin-bottom: 20px;
+    }
+
+    .list-group {
+        margin-top: 20px;
+    }
+
+    .list-group-item {
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        margin-bottom: 10px;
+        transition: all 0.3s;
+    }
+
+    .list-group-item:hover {
+        background-color: #f8f9fa;
+        border-color: #007bff;
+    }
+
+    .list-group-item-action {
+        font-size: 18px;
+        color: #343a40;
+        text-decoration: none;
+        display: block;
+        padding: 10px 15px;
+    }
+
+    .list-group-item-action:hover {
+        color: #007bff;
+        text-decoration: none;
+    }
+</style>
 {% endblock %}

@@ -1,8 +1,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>{{ quiz.title }}</h2>
-<p>{{ quiz.description }}</p>
-<a href="{% url 'submit_quiz' quiz.pk %}" class="btn btn-primary">Take Quiz</a>
+<div class="card mt-4">
+    <div class="card-body">
+        <h2 class="card-title">{{ quiz.title }}</h2>
+        <p class="card-text">{{ quiz.description }}</p>
+        <a href="{% url 'submit_quiz' quiz.pk %}" class="btn btn-primary">Take Quiz</a>
+    </div>
+</div>
 {% endblock %}
-

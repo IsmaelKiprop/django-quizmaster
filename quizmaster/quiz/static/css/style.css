@@ -1,7 +1,10 @@
 /* Base Template Styles */
 body {
     font-family: 'Roboto', sans-serif;
-    background-color: #f8f9fa;
+    background-image: url("{% static 'images/background.jpg' %}");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .navbar {
@@ -57,7 +60,19 @@ body {
 }
 
 .card-body {
-    padding: 15px;
+    padding: 20px;
+}
+
+.card-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #343a40;
+}
+
+.card-text {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 15px;
 }
 
 .list-group-item {
@@ -83,13 +98,96 @@ body {
     margin-bottom: 20px;
 }
 
+.list-group-item {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+}
+
+.list-group-item:hover {
+    background-color: #f8f9fa;
+}
+
+.list-group-item h3 {
+    font-size: 20px;
+    font-weight: bold;
+    color: #343a40;
+    margin-bottom: 10px;
+}
+
+.list-group-item p {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.list-group-item .btn {
+    background-color: #007bff;
+    border-color: #007bff;
+    color: #fff;
+    transition: background-color 0.3s;
+}
+
+.list-group-item .btn:hover {
+    background-color: #0056b3;
+}
+
 /* Quiz Detail Styles */
 .quiz-detail {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
     margin-bottom: 20px;
 }
 
-.quiz-question {
+.quiz-detail h2 {
+    font-size: 24px;
+    font-weight: bold;
+    color: #343a40;
     margin-bottom: 10px;
+}
+
+.quiz-detail p {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.quiz-question {
+    font-size: 18px;
+    font-weight: bold;
+    color: #343a40;
+    margin-bottom: 10px;
+}
+
+.quiz-answer {
+    font-size: 16px;
+    color: #666;
+    margin-bottom: 5px;
+}
+
+.quiz-answer input[type="radio"] {
+    margin-right: 10px;
+}
+
+.quiz-submit-btn {
+    width: 100%;
+    padding: 10px;
+    font-size: 18px;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.quiz-submit-btn:hover {
+    background-color: #0056b3;
 }
 
 /* Create Quiz Styles */
@@ -106,10 +204,12 @@ body {
 .create-quiz-form h2 {
     text-align: center;
     margin-bottom: 20px;
+    color: #343a40;
 }
 
 .create-quiz-form label {
     font-weight: bold;
+    color: #343a40;
 }
 
 .create-quiz-form input[type="text"],
@@ -153,6 +253,7 @@ body {
 .auth-container h2 {
     text-align: center;
     margin-bottom: 20px;
+    color: #343a40;
 }
 
 .auth-form {
@@ -161,6 +262,7 @@ body {
 
 .auth-form label {
     font-weight: bold;
+    color: #343a40;
 }
 
 .auth-form input[type="text"],

@@ -1,12 +1,77 @@
-<!-- quizzes/templates/quizzes/create_quiz.html -->
-
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1>Create Quiz</h1>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Save Quiz</button>
-  </form>
+<div class="container">
+    <h1>Create Quiz</h1>
+    <form method="post" class="create-quiz-form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Save Quiz</button>
+    </form>
+</div>
+
+<style>
+    /* General Styles */
+    body {
+        font-family: 'Roboto', sans-serif;
+        background-color: #f8f9fa;
+    }
+
+    .container {
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 20px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+        font-size: 28px;
+        font-weight: bold;
+        color: #343a40;
+        margin-bottom: 20px;
+    }
+
+    .create-quiz-form {
+        padding: 15px;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+    }
+
+    .create-quiz-form label {
+        font-weight: bold;
+        color: #343a40;
+    }
+
+    .create-quiz-form input[type="text"],
+    .create-quiz-form input[type="number"],
+    .create-quiz-form textarea {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        margin-bottom: 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .create-quiz-form button {
+        width: 100%;
+        padding: 10px;
+        font-size: 18px;
+        color: #fff;
+        background-color: #007bff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+
+    .create-quiz-form button:hover {
+        background-color: #0056b3;
+    }
+</style>
 {% endblock %}
