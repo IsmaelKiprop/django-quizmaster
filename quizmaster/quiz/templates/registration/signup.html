@@ -1,10 +1,77 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>Sign up</h2>
-<form method="post">
-  {% csrf_token %}
-  {{ form.as_p }}
-  <button type="submit">Sign up</button>
-</form>
+<div class="auth-container">
+    <h2 class="text-center">Sign Up</h2>
+    <form method="post">
+        {% csrf_token %}
+        <div class="auth-form">
+            <label for="id_username">Username:</label>
+            {{ form.username }}
+            {% if form.username.errors %}
+                {% for error in form.username.errors %}
+                    <div class="alert alert-danger mt-2" role="alert">
+                        {{ error }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <div class="auth-form">
+            <label for="id_email">Email:</label>
+            {{ form.email }}
+            {% if form.email.errors %}
+                {% for error in form.email.errors %}
+                    <div class="alert alert-danger mt-2" role="alert">
+                        {{ error }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <div class="auth-form">
+            <label for="id_password1">Password:</label>
+            <small id="passwordHelp" class="form-text text-muted mb-2">Must be at least 8 characters long and include at least one uppercase letter, one lowercase letter, one number, and one special character.</small>
+            <div class="input-group">
+                <input type="password" name="password1" id="id_password1" class="form-control" placeholder="Enter your password" aria-label="Password" aria-describedby="toggle-password">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" id="toggle-password" onclick="togglePasswordVisibility('id_password1')">Show</button>
+                </div>
+            </div>
+            {% if form.password1.errors %}
+                {% for error in form.password1.errors %}
+                    <div class="alert alert-danger mt-2" role="alert">
+                        {{ error }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <div class="auth-form">
+            <label for="id_password2">Confirm Password:</label>
+            <input type="password" name="password2" id="id_password2" class="form-control" placeholder="Confirm your password">
+            {% if form.password2.errors %}
+                {% for error in form.password2.errors %}
+                    <div class="alert alert-danger mt-2" role="alert">
+                        {{ error }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Sign Up</button>
+    </form>
+    <p class="text-center mt-3">Already have an account? <a href="{% url 'login' %}">Login here</a></p>
+</div>
+
+<script>
+    function togglePasswordVisibility(inputId) {
+        var passwordInput = document.getElementById(inputId);
+        var toggleButton = document.getElementById('toggle-password');
+        
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            toggleButton.textContent = "Hide";
+        } else {
+            passwordInput.type = "password";
+            toggleButton.textContent = "Show";
+        }
+    }
+</script>
 {% endblock %}
