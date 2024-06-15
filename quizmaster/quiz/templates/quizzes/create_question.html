@@ -1,12 +1,12 @@
-<!-- quizzes/templates/quizzes/create_quiz.html -->
+<!-- quizzes/templates/quizzes/create_question.html -->
 
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1>Create Quiz</h1>
+  <h1>Create Question</h1>
   <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Save Quiz</button>
+    <button type="submit">Save Question</button>
   </form>
 {% endblock %}
